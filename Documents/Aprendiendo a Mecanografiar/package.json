@@ -1,0 +1,55 @@
+{
+  "name": "aprendiendo-a-mecanografiar",
+  "version": "1.0.6",
+  "description": "Juego interactivo de mecanografia con Electron y Sqlite",
+  "main": "main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.pablodarling.mecanografia",
+    "productName": "Aprendiendo a Mecanografiar",
+    "files": [
+      "main/**/*.js",
+      "main/**/*.json",
+      "public/**/*",
+      "assets/**/*",
+      "icon.ico",
+      "package.json",
+      "!**/*.log",
+      "!**/*.md",
+      "!**/*.map",
+      "!node_modules/.cache",
+      "!node_modules/**/test/**",
+      "!dist/**",
+      "**/*",
+      "aprendiendo.db"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "deleteAppDataOnUninstall": false
+    }
+  },
+  
+  "devDependencies": {
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^12.4.1"
+  }
+}

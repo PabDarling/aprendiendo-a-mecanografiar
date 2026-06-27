@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Juego Interativo</title>
+</head>
+
+<body>
+
+    <div class="titulo">
+        <div>APRENDIENDO A MECANOGRAFIAR</div>
+        <div id="mensajebienvenida"></div>
+        <div><a href="opciones.html">JUGAR</a></div>
+        <div><a id="linkTutorial" href="?tutorial=1">TUTORIAL</a></div>
+        <div><a href="Puntajes.html">PUNTAJES</a></div>
+        <div><a href="javascript:window.close();">SALIR</a></div>
+    </div>
+
+    <script>
+
+        const user = JSON.parse(localStorage.getItem("user"));
+        const welcomeEl = document.getElementById("mensajebienvenida");
+
+        if (user && user.nombre) {
+            welcomeEl.textContent = `Bienvenido/a, ${user.nombre}!`;
+        } else {
+            welcomeEl.textContent = `Bienvenido/a!`
+        }
+    </script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const modoTutorial = params.get("tutorial") === "1";
+
+        if (modoTutorial) iniciarTutorialMenu();
+
+        function iniciarTutorialMenu() {
+            const box = crearCajaTutorial();
+            let step = 0;
+
+            box.querySelector("#msg").innerText =
+                "Bienvenido al modo Tutorial. \n" +
+                "Esta es la pantalla principal del juego. \n";
+
+            document.getElementById("btnNext").onclick = () => {
+                step++;
+
+                if (step === 1) {
+                    box.querySelector("#msg").innerText =
+                        "Desde aqui podés Jugar, ver los Puntajes o Salir.\n" +
+                        "Haz clic en JUGAR para continuar. \n";
+                    desactivarTodomenosJugar();
+                }
+            };
+        }
+
+        function crearCajaTutorial() {
+            let div = document.createElement("div");
+            div.id = "tutorialBox";
+
+            div.style.position = "fixed";
+            div.style.bottom = "120px";
+            div.style.left = "20px";
+            div.style.width = "380px";
+            div.style.background = "rgba(0,0,0,0.85)";
+            div.style.color = "yellow";
+            div.style.padding = "20px";
+            div.style.fontSize = "24px";
+            div.style.borderRadius = "10px";
+            div.style.textAlign = "left";
+            div.style.zIndex = "9999";
+            document.body.appendChild(div);
+
+            let msg = document.createElement("div");
+            msg.id = "msg";
+            msg.style.marginBottom = "15px";
+            div.appendChild(msg);
+
+            let btn = document.createElement("button");
+            btn.id = "btnNext"
+            btn.innerText = "Continuar";
+            btn.style.marginTop = "15px";
+            btn.style.fontSize = "20px";
+            btn.style.background = "white";
+            btn.style.borderRadius = "5px";
+            btn.style.padding = "8px 15px";
+            btn.style.cursor = "pointer";
+
+            div.appendChild(btn);
+
+            document.body.appendChild(div);
+            return div;
+        }
+
+        function desactivarTodomenosJugar() {
+            document.querySelectorAll("a").forEach(el => {
+                if (!el.textContent.includes("JUGAR")) {
+                    el.style.opacity = "0.3";
+                    el.style.pointerEvents = "none";
+                }
+            });
+        }
+    </script>
+
+    <script src="js/tutorial-links.js"></script>
+</body>
+
+</html>

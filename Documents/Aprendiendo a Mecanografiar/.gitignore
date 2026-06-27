@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vs/
+.vscode/
+*.db
+*.exe
+*.rar
+*.7z
+package-lock.json

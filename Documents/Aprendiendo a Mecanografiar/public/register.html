@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="css/styleslr.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Registrarse</h2>
+        <form id="registerForm">
+            <input type="text" id="registerUsername" name="username" placeholder="Nombre de Usuario" required>
+            <input type="password" id="registerPassword" name="password" placeholder="Contraseña" required>
+            <input type="submit" value="Registrarse">
+            <div id="registerError" class="error"></div>
+
+            <div id="registerSuccess" class="success"></div>
+
+        </form>
+        <p>¿Ya tienes una cuenta? <a href="#" onclick="window.location.replace('login.html')">Iniciar Sesión</a></p>
+    </div>
+
+    <script src="js/register.js"></script>
+</body>
+
+</html>

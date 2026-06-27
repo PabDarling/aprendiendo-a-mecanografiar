@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Configuracion De Partida</title>
+</head>
+
+<body>
+
+    <div class="titulo">APRENDIENDO A MECANOGRAFIAR</div>
+
+    <div class="config">
+
+        <div class="dificultad"> ELEGIR DIFICULTAD <br>
+            <input type="radio" name="dificultad" value="principiante"> Principiante <br>
+            <input type="radio" name="dificultad" value="avanzado"> Avanzado <br>
+            <input type="radio" name="dificultad" value="dificil"> Experto <br>
+        </div>
+        <div class="tiempo"> ELEGIR TIEMPO <br>
+            <input type="radio" name="tiempo" value="240">4 minutos <br>
+            <input type="radio" name="tiempo" value="480">8 minutos<br>
+        </div>
+
+        <div class="tutorial"> MODO TUTORIAL<br>
+            <input type="radio" name="tutorial" id="tutorialOn" value="1"> Activar Tutorial <br>
+            <input type="radio" name="tutorial" id="tutorialOff" value="0"> Desactivar Tutorial <br>
+        </div>
+
+        <div class="comenzar">
+            <button onclick="verificarcondicion()">INICIAR JUEGO</button>
+        </div>
+
+        <div class="return">
+            <a href="index.html">VOLVER</a>
+        </div>
+
+    </div>
+
+    <script>
+        function verificarcondicion() {
+
+            const tutorial = document.querySelector('input[name="tutorial"]:checked')?.value;
+
+            if (tutorial === "1") {
+
+                localStorage.setItem("dificultadSeleccionada", "principiante");
+                localStorage.setItem("tiemposeleccionado", "240");
+
+                window.location.href = "juego.html?tutorial=1";
+                return;
+            }
+
+            //MODO NORMAL
+            let dificultad = document.querySelector('input[name="dificultad"]:checked');
+            let tiempo = document.querySelector('input[name="tiempo"]:checked');
+
+
+            if (dificultad === null) {
+                alert('DEBE SELECCIONAR UNA DIFICULTAD');
+            } else {
+                if (tiempo === null) {
+                    alert('DEBE SELECCIONAR UN TIEMPO')
+                } else {
+
+
+                    localStorage.setItem('dificultadSeleccionada', dificultad.value);
+                    localStorage.setItem('tiemposeleccionado', tiempo.value);
+                    window.location.href = "juego.html";
+                }
+            }
+        }
+    </script>
+
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const modoTutorial = params.get("tutorial") === "1";
+
+        if (modoTutorial) iniciarTutorialOpciones();
+
+        function iniciarTutorialOpciones() {
+            const box = crearCajaTutorial();
+            let step = 0;
+
+            const msg = document.getElementById("msg");
+            const btnNext = document.getElementById("btnNext");
+
+            desactivarTodo();
+
+            msg.innerText =
+                "Esta es la pantalla de opciones. \n" +
+                "Aqui se selecciona la dificultad y tiempo del juego\n" +
+                "Es necesario seleccionar ambas para continuar";
+
+            btnNext.onclick = () => {
+
+                step++;
+
+                if (step === 1) {
+
+                    localStorage.setItem("dificultadSeleccionada", "Principiante");
+                    localStorage.setItem("tiemposeleccionado", "240");
+
+                    document.querySelector('input[value="principiante"]').checked = true;
+                    document.querySelector('input[value="240"]').checked = true;
+
+                    msg.innerText =
+                        "Para el tutorial, por favor seleccionar ACTIVAR TUTORIAL \n" +
+                        "usaremos la dificultad 'principiante y tiempo '4 Minutos'";
+
+                }
+
+                if (step === 2) {
+                    msg.innerText =
+                        "Haz click en Iniciar Juego"
+                    activarSoloIniciar();
+                }
+
+
+            }
+
+        }
+
+        function crearCajaTutorial() {
+            let div = document.createElement("div");
+            div.id = "tutorialBox";
+            div.style.position = "fixed";
+            div.style.bottom = "20px";
+            div.style.left = "20px";
+            div.style.width = "380px";
+            div.style.background = "rgba(0,0,0,0.8)";
+            div.style.color = "orange";
+            div.style.padding = "20px";
+            div.style.fontSize = "24px";
+            div.style.borderRadius = "10px";
+            div.style.textAlign = "left";
+            div.style.zIndex = "9999";
+
+            let msg = document.createElement("div");
+            msg.id = "msg";
+            msg.style.marginBottom = "15px";
+            div.appendChild(msg);
+
+            let btn = document.createElement("button");
+            btn.id = "btnNext"
+            btn.innerText = "Continuar";
+            btn.style.marginTop = "15px";
+            btn.style.fontSize = "20px";
+            btn.style.background = "white";
+            btn.style.borderRadius = "5px";
+            btn.style.padding = "8px 15px";
+            btn.style.cursor = "pointer";
+
+            div.appendChild(btn);
+
+            document.body.appendChild(div);
+
+            return div;
+
+        }
+
+        function desactivarTodo() {
+            document.querySelectorAll("button:not(#btnNext), a, div.opcion").forEach(el => {
+                el.style.pointerEvents = "none";
+                el.style.opacity = "0.3";
+            });
+        }
+
+        function activarSoloIniciar() {
+            document.querySelectorAll("button").forEach(el => {
+                if (el.innerText.toUpperCase().includes("INICIAR")) {
+                    el.style.pointerEvents = "auto";
+                    el.style.opacity = "1";
+                }
+            });
+        }
+    </script>
+
+    <script>
+        const btnIniciar = document.querySelector(".comenzar button");
+        const tutorialOn = document.getElementById("tutorialOn");
+        const tutorialOff = document.getElementById("tutorialOff");
+
+        const radiosDificultad = document.querySelectorAll('input[name="dificultad"]');
+        const radiosTiempo = document.querySelectorAll('input[name="tiempo"]');
+
+
+        function desactivarOpciones() {
+            radiosDificultad.forEach(r => r.disabled = true);
+            radiosTiempo.forEach(r => r.disabled = true);
+        }
+
+        function activarOpciones() {
+            radiosDificultad.forEach(r => r.disabled = false);
+            radiosTiempo.forEach(r => r.disabled = false);
+        }
+
+        tutorialOn.addEventListener("change", () => {
+            document.querySelector('input[value="principiante"]').checked = true;
+            document.querySelector('input[value="240"]').checked = true;
+
+            localStorage.setItem("dificultadSeleccionada", "principante");
+            localStorage.setItem("tiemposeleccionado", "240");
+
+            desactivarOpciones();
+            habilitarIniciar();
+        });
+
+        tutorialOff.addEventListener("change", () => {
+            activarOpciones();
+        });
+
+
+    </script>
+
+    <script src="js/tutorial-links.js"></script>
+
+
+
+
+
+</body>
+
+</html>

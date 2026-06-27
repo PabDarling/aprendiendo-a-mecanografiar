@@ -1,0 +1,233 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../img/space.jpg'); /* Ruta a tu imagen space.png */
+    background-size: cover; /* Ajustar el tamaño de la imagen para cubrir todo el fondo */
+    background-position: center; /* Centrar la imagen en el fondo */
+}
+
+
+.titulo {
+    text-align: center;
+    margin-top: 30px;
+    color: #fff;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* Contorno negro */
+}
+
+.titulo div {
+    margin-top: 10px;
+}
+
+
+
+.titulo div a {
+    color: yellow;
+    text-decoration: none;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* Contorno negro */
+}
+
+a {
+    text-align: center;
+}
+
+#pantalla,
+#texto_completado {
+    color: white; /* Color blanco */
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* Contorno negro */
+}
+
+.titulo {
+    font-size: 50px;
+    text-align: center;
+}
+
+.config {
+    font-size: 50px;
+    text-align: center;
+    color: #FFA500;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* Contorno negro */
+} 
+
+
+button {
+    font-size: 50px;
+}
+
+.return {
+    font-size: 50;
+    text-align: left;
+}
+
+.contenedor {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Espacio entre los elementos en la cuadrícula */
+    align-items: center;
+    padding: 10px 30px;
+    box-sizing: border-box;
+}
+
+.contador {
+    font-size: 50px;
+    top: 20px;
+    left:0px; /* Ajusta la posición desde el borde izquierdo */
+    color: white;
+    padding: 10px;
+}
+
+.puntaje {
+    font-size: 50px;
+    text-align: right;
+    color: white;
+
+}
+
+.keyboard {
+    display: grid;
+    gap: 5px;
+    padding: 10px;
+    background-color: grey;
+    border: 1px solid #ccc;
+    text-align: center;
+    position: relative;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.key {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    font-size: 16px;
+}
+
+#space {
+    width: 230px ;
+}
+
+.letra-color.q-color {
+    background-color:orangered;
+}
+
+.letra-color.w-color {
+    background-color: orange;
+}
+
+.letra-color.e-color {
+    background-color: lightyellow;
+}
+
+.letra-color.r-color {
+    background-color: greenyellow;
+}
+
+.letra-color.t-color {
+    background-color: green;
+}
+
+.letra-color.y-color {
+    background-color: aqua;
+}
+
+.letra-color.u-color {
+    background-color: lightblue;
+}
+
+.letra-color.i-color {
+    background-color: violet;
+}
+
+.letra-color.o-color {
+    background-color: pink;
+}
+
+.letra-color.p-color {
+    background-color: lightsalmon;
+}
+
+.key.q-color {
+    background-color:orangered;
+}
+
+.key.w-color {
+    background-color: orange;
+}
+
+.key.e-color {
+    background-color: lightyellow;
+}
+
+.key.r-color {
+    background-color: greenyellow;
+}
+
+.key.t-color {
+    background-color: green;
+}
+
+.key.y-color {
+    background-color: aqua;
+}
+
+.key.u-color {
+    background-color: lightblue;
+}
+
+.key.i-color {
+    background-color: violet;
+}
+
+.key.o-color {
+    background-color: pink;
+}
+
+.key.p-color {
+    background-color: rgb(47, 0, 255);
+}
+
+
+
+.resaltado {
+    background-color: yellow;
+}
+
+#pantalla {
+    font-size: 50px;
+    text-align: center;
+}
+
+#texto_completado {
+    font-size: 30px;
+    text-align: left;
+}
+
+/* Estilos para las cajas de texto guía de los dedos */
+
+.hands-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: -40px;
+    pointer-events: none;
+}
+
+.hands-image {
+    width: 320px;      /* ← ESTE es el tamaño real visible */
+    pointer-events: none;
+}
+
